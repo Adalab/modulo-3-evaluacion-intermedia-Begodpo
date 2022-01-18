@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import contacts from "../data/contacts";
 import getAdalabers from "../services/api";
 import "../styles/App.scss";
