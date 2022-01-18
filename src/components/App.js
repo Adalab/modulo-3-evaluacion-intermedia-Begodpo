@@ -3,22 +3,50 @@ import getAdalabers from "../services/api";
 import "../styles/App.scss";
 
 function App() {
+  // states
   const [adalabers, setAdalabers] = useState([]);
 
-  const [name, setName] = useState("");
-  const [counselor, setCounselor] = useState("");
-  const [speciality, setSpeciality] = useState("");
+  const [newAdalaber, setNewAdalaber] = useState({
+    name: "",
+    counselor: "",
+    speciality: "",
+  });
 
+  // handle
   const handleChangeName = (ev) => {
-    setName(ev.currentTarget.value);
+    setNewAdalaber({
+      ...newAdalaber,
+      name: ev.currentTarget.value,
+    });
   };
   const handleChangeCounselor = (ev) => {
-    setCounselor(ev.currentTarget.value);
+    setNewAdalaber({
+      ...newAdalaber,
+      counselor: ev.currentTarget.value,
+    });
   };
   const handleChangeSpeciality = (ev) => {
-    setSpeciality(ev.currentTarget.value);
+    setNewAdalaber({
+      ...newAdalaber,
+      speciality: ev.currentTarget.value,
+    });
   };
 
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+  };
+
+  const handleClickNewAdalaber = (ev) => {
+    newAdalaber.id = adalabers.length;
+    setAdalabers([...adalabers, newAdalaber]);
+    setNewAdalaber({
+      name: "",
+      counselor: "",
+      speciality: "",
+    });
+  };
+
+  // effects
   useEffect(() => {
     getAdalabers().then((responseData) => {
       setAdalabers(responseData.results);
@@ -59,22 +87,28 @@ function App() {
         </section>
         <section>
           <h2>Añadir una Adalaber</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="">Nombre: </label>
-            <input type="text" value={name} onChange={handleChangeName} />
+            <input
+              type="text"
+              value={newAdalaber.name}
+              onChange={handleChangeName}
+            />
             <label htmlFor="">Tutora: </label>
             <input
               type="text"
-              value={counselor}
+              value={newAdalaber.counselor}
               onChange={handleChangeCounselor}
             />
             <label htmlFor="">Especialidad: </label>
             <input
               type="text"
-              value={speciality}
+              value={newAdalaber.speciality}
               onChange={handleChangeSpeciality}
             />
-            <button>Añadir una nueva Adalaber</button>
+            <button onClick={handleClickNewAdalaber}>
+              Añadir una nueva Adalaber
+            </button>
           </form>
         </section>
       </main>
