@@ -1,10 +1,20 @@
-import { useState } from "react";
-import adalaberList from "../data/contacts.json";
+import { useState, useEffect } from "react";
+
 import "../styles/App.scss";
 
 function App() {
-  const [adalabers, setAdalabers] = useState(adalaberList.results);
-  console.log(adalabers);
+  const [adalabers, setAdalabers] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "https://beta.adalab.es/pw-recursos/apis/adalabers-v1/promo-patata.json"
+    )
+      .then((response) => response.json())
+      .then((responseData) => {
+        setAdalabers(responseData.results);
+      });
+  }, []);
+
   const renderAdalabers = () => {
     return adalabers.map((adalaber) => {
       return (
