@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
-import contacts from "../data/contacts";
-import getAdalabers from "../services/api";
+import { useState } from "react";
+import adalaberList from "../data/contacts.json";
 import "../styles/App.scss";
 
 function App() {
-  // state
-  const [adalaberList, setAdalaberList] = useState([]);
-
-  //effects
-
-  // render
-  const adalabers = adalaberList.results;
+  const [adalabers, setAdalabers] = useState(adalaberList.results);
+  console.log(adalabers);
   const renderAdalabers = () => {
     return adalabers.map((adalaber) => {
-      console.log(adalaber);
       return (
         <tbody key={adalaber.id}>
           <tr>
@@ -27,16 +20,23 @@ function App() {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Tutora</th>
-          <th>Especialidad</th>
-        </tr>
-      </thead>
-      {renderAdalabers()}
-    </table>
+    <div>
+      <header>
+        <h1>Adalabers</h1>
+      </header>
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tutora</th>
+              <th>Especialidad</th>
+            </tr>
+          </thead>
+          {renderAdalabers()}
+        </table>
+      </main>
+    </div>
   );
 }
 
