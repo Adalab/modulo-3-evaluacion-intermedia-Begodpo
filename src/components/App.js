@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
+import contacts from "../data/contacts";
+import getAdalabers from "../services/api";
 import "../styles/App.scss";
-import adalaberList from "../data/contacts.json";
 
 function App() {
+  // state
+  const [adalaberList, setAdalaberList] = useState([]);
+
+  //effects
+
+  // render
   const adalabers = adalaberList.results;
-  console.log(adalabers);
   const renderAdalabers = () => {
     return adalabers.map((adalaber) => {
       console.log(adalaber);
