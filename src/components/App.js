@@ -56,13 +56,11 @@ function App() {
   const renderAdalabers = () => {
     return adalabers.map((adalaber) => {
       return (
-        <tbody key={adalaber.id}>
-          <tr>
-            <td>{adalaber.name}</td>
-            <td>{adalaber.counselor}</td>
-            <td>{adalaber.speciality}</td>
-          </tr>
-        </tbody>
+        <tr key={adalaber.id}>
+          <td>{adalaber.name}</td>
+          <td>{adalaber.counselor}</td>
+          <td>{adalaber.speciality}</td>
+        </tr>
       );
     });
   };
@@ -82,7 +80,7 @@ function App() {
                 <th>Especialidad</th>
               </tr>
             </thead>
-            {renderAdalabers()}
+            <tbody>{renderAdalabers()}</tbody>
           </table>
         </section>
         <section>
